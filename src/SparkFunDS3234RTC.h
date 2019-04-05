@@ -82,12 +82,12 @@ enum DS3234_registers {
 	DS3234_REGISTER_TEMPM,   // 0x11
 	DS3234_REGISTER_TEMPL,   // 0x12
 	DS3234_REGISTER_TEMPEN,  // 0x13
-  DS3234_REGISTER_RESERV1, // 0x14
-  DS3234_REGISTER_RESERV2, // 0x15
-  DS3234_REGISTER_RESERV3, // 0x16
-  DS3234_REGISTER_RESERV4, // 0x17
-  DS3234_REGISTER_SRAMA,   // 0x18
-  DS3234_REGISTER_SRAMD    // 0x19
+ 	DS3234_REGISTER_RESERV1, // 0x14
+	DS3234_REGISTER_RESERV2, // 0x15
+ 	DS3234_REGISTER_RESERV3, // 0x16
+  	DS3234_REGISTER_RESERV4, // 0x17
+  	DS3234_REGISTER_SRAMA,   // 0x18
+  	DS3234_REGISTER_SRAMD    // 0x19
 };
 
 // Base register for complete time/date readings
@@ -190,6 +190,59 @@ public:
 	void setAlarm2(uint8_t minute = 255, uint8_t hour = 255, uint8_t date = 255, bool day = false);
 	// Second alarm 2 set function if the clock is in 12-hour mode:
 	void setAlarm2(uint8_t minute, uint8_t hour12, bool pm, uint8_t date = 255, bool day = false);
+
+	// To set specific values of alarm1, use the setAlarm1____ functions:
+	void setAlarm1Second(uint8_t s);
+	void setAlarm1Minute(uint8_t m);
+	void setAlarm1Hour(uint8_t h);
+	void setAlarm1Day(uint8_t d);
+
+	// To set specific values of alarm2, use the setAlarm2____ functions:
+	void setAlarm2Minute(uint8_t m);
+	void setAlarm2Hour(uint8_t h);
+	void setAlarm2Day(uint8_t d);
+	
+	///////////////////////
+	// Reading Alarm 1 //
+	///////////////////////
+	inline uint8_t alarm1Second(void) { return BCDtoDEC(_alarm1[TIME_SECONDS]); };
+	inline uint8_t alarm1Minute(void) { return BCDtoDEC(_alarm1[TIME_MINUTES]); };
+	inline uint8_t alarm1Hour(void) { return BCDtoDEC(_alarm1[TIME_HOURS]); };
+	inline uint8_t alarm1Day(void) { return BCDtoDEC(_alarm1[TIME_DAY]); };
+	inline const char alarm1DayChar(void) { return dayIntToChar[BCDtoDEC(_alarm1[TIME_DAY]) - 1]; };
+	inline const char * alarm1DayStr(void) { return dayIntToStr[BCDtoDEC(_alarm1[TIME_DAY]) - 1]; };
+	inline uint8_t alarm1Date(void) { return BCDtoDEC(_alarm1[TIME_DATE]); };
+	inline uint8_t alarm1Month(void) { return BCDtoDEC(_alarm1[TIME_MONTH]);	};
+	inline uint8_t alarm1Year(void) { return BCDtoDEC(_alarm1[TIME_YEAR]); };
+
+	///////////////////////
+	// Reading Alarm 2 //
+	///////////////////////
+	inline uint8_t alarm2Minute(void) { return BCDtoDEC(_alarm2[TIME_MINUTES]); };
+	inline uint8_t alarm2Hour(void) { return BCDtoDEC(_alarm2[TIME_HOURS]); };
+	inline uint8_t alarm2Day(void) { return BCDtoDEC(_alarm2[TIME_DAY]); };
+	inline const char alarm2DayChar(void) { return dayIntToChar[BCDtoDEC(_alarm2[TIME_DAY]) - 1]; };
+	inline const char * alarm2DayStr(void) { return dayIntToStr[BCDtoDEC(_alarm2[TIME_DAY]) - 1]; };
+	inline uint8_t alarm2Date(void) { return BCDtoDEC(_alarm2[TIME_DATE]); };
+	inline uint8_t alarm2Month(void) { return BCDtoDEC(_alarm2[TIME_MONTH]);	};
+	inline uint8_t alarm2Year(void) { return BCDtoDEC(_alarm2[TIME_YEAR]); };
+	
+	// To read a single value at a time, use the getAlarm1___ functions:
+	uint8_t getAlarm1Second(void);
+	uint8_t getAlarm1Minute(void);
+	uint8_t getAlarm1Hour(void);
+	uint8_t getAlarm1Day(void);
+	uint8_t getAlarm1Date(void);
+	uint8_t getAlarm1Month(void);
+	uint8_t getAlarm1Year(void);
+
+	// To read a single value at a time, use the getAlarm2___ functions:
+	uint8_t getAlarm2Minute(void);
+	uint8_t getAlarm2Hour(void);
+	uint8_t getAlarm2Day(void);
+	uint8_t getAlarm2Date(void);
+	uint8_t getAlarm2Month(void);
+	uint8_t getAlarm2Year(void);
 	
 	// The SQW pin can be used as an interrupt. It is active-low, and can be
 	// set to trigger on alarm 1 and/or alarm 2:
@@ -225,15 +278,19 @@ public:
 private:
 	uint8_t _csPin;
 	uint8_t _time[TIME_ARRAY_LENGTH];
+	uint8_t _alarm1[TIME_ARRAY_LENGTH];
+	uint8_t _alarm2[TIME_ARRAY_LENGTH];
 	bool _pm;
+	bool _a1Pm;
+	bool _a2Pm;
 	
 	uint8_t BCDtoDEC(uint8_t val);
 	uint8_t DECtoBCD(uint8_t val);
 	
-	void spiWriteBytes(DS3234_registers reg, uint8_t * values, uint8_t len);
+	void spiWriteBytes(DS3234_registers reg, uint8_t * values, uint8_t len, uint8_t offset = 0);
 	void spiWriteByte(DS3234_registers reg, uint8_t value);
 	uint8_t spiReadByte(DS3234_registers reg);
-	void spiReadBytes(DS3234_registers reg, uint8_t * dest, uint8_t len);
+	void spiReadBytes(DS3234_registers reg, uint8_t * dest, uint8_t len, uint8_t offset = 0);
 };
 
 extern DS3234 rtc;
