@@ -897,7 +897,7 @@ void DS3234::spiWriteBytes(DS3234_registers reg, uint8_t *values, uint8_t len, u
 	SPI.beginTransaction(DS3234SPISettings);
 	digitalWrite(_csPin, LOW);
 	SPI.transfer(writeReg);
-	for (int i = offset; i < len - offset; i++)
+	for (int i = offset; i < len + offset; i++)
 	{
 		SPI.transfer(values[i]);
 	}
@@ -938,7 +938,7 @@ void DS3234::spiReadBytes(DS3234_registers reg, uint8_t *dest, uint8_t len, uint
 	SPI.beginTransaction(DS3234SPISettings);
 	digitalWrite(_csPin, LOW);
 	SPI.transfer(reg);
-	for (int i = offset; i < len - offset; i++)
+	for (int i = offset; i < len + offset; i++)
 	{
 		dest[i] = SPI.transfer(0x00);
 	}
