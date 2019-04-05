@@ -446,6 +446,21 @@ bool DS3234::pm(void)
 	return hourRegister & TWELVE_HOUR_PM;
 }
 
+
+bool DS3234::alarm1Pm(void)
+{
+	uint8_t hourRegister = spiReadByte(DS3234_REGISTER_A1HR);
+
+	return hourRegister & TWELVE_HOUR_PM;
+}
+
+bool DS3234::alarm2Pm(void)
+{
+	uint8_t hourRegister = spiReadByte(DS3234_REGISTER_A2HR);
+
+	return hourRegister & TWELVE_HOUR_PM;
+}
+
 // enable -- enable the DS3234's oscillator.
 void DS3234::enable(void)
 {

@@ -171,6 +171,8 @@ public:
 	bool is12Hour(void);
 	// pm -- Check if 12-hour state is AM or PM | returns true if PM
 	bool pm(void);
+	bool alarm1Pm(void);
+	bool alarm2Pm(void);
 	
 	// DS3234 has a die-temperature reading. Value is produced in multiples of 0.25 deg C
 	float temperature(void);
