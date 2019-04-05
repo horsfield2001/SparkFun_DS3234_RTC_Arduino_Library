@@ -213,9 +213,6 @@ public:
 	inline uint8_t alarm1Day(void) { return BCDtoDEC(_alarm1[TIME_DAY]); };
 	inline const char alarm1DayChar(void) { return dayIntToChar[BCDtoDEC(_alarm1[TIME_DAY]) - 1]; };
 	inline const char * alarm1DayStr(void) { return dayIntToStr[BCDtoDEC(_alarm1[TIME_DAY]) - 1]; };
-	inline uint8_t alarm1Date(void) { return BCDtoDEC(_alarm1[TIME_DATE]); };
-	inline uint8_t alarm1Month(void) { return BCDtoDEC(_alarm1[TIME_MONTH]);	};
-	inline uint8_t alarm1Year(void) { return BCDtoDEC(_alarm1[TIME_YEAR]); };
 
 	///////////////////////
 	// Reading Alarm 2 //
@@ -225,26 +222,17 @@ public:
 	inline uint8_t alarm2Day(void) { return BCDtoDEC(_alarm2[TIME_DAY]); };
 	inline const char alarm2DayChar(void) { return dayIntToChar[BCDtoDEC(_alarm2[TIME_DAY]) - 1]; };
 	inline const char * alarm2DayStr(void) { return dayIntToStr[BCDtoDEC(_alarm2[TIME_DAY]) - 1]; };
-	inline uint8_t alarm2Date(void) { return BCDtoDEC(_alarm2[TIME_DATE]); };
-	inline uint8_t alarm2Month(void) { return BCDtoDEC(_alarm2[TIME_MONTH]);	};
-	inline uint8_t alarm2Year(void) { return BCDtoDEC(_alarm2[TIME_YEAR]); };
 	
 	// To read a single value at a time, use the getAlarm1___ functions:
 	uint8_t getAlarm1Second(void);
 	uint8_t getAlarm1Minute(void);
 	uint8_t getAlarm1Hour(void);
 	uint8_t getAlarm1Day(void);
-	uint8_t getAlarm1Date(void);
-	uint8_t getAlarm1Month(void);
-	uint8_t getAlarm1Year(void);
 
 	// To read a single value at a time, use the getAlarm2___ functions:
 	uint8_t getAlarm2Minute(void);
 	uint8_t getAlarm2Hour(void);
 	uint8_t getAlarm2Day(void);
-	uint8_t getAlarm2Date(void);
-	uint8_t getAlarm2Month(void);
-	uint8_t getAlarm2Year(void);
 	
 	// The SQW pin can be used as an interrupt. It is active-low, and can be
 	// set to trigger on alarm 1 and/or alarm 2:
