@@ -192,15 +192,15 @@ public:
 	void setAlarm2(uint8_t minute, uint8_t hour12, bool pm, uint8_t date = 255, bool day = false);
 
 	// To set specific values of alarm1, use the setAlarm1____ functions:
-	void setAlarm1Second(uint8_t s);
-	void setAlarm1Minute(uint8_t m);
-	void setAlarm1Hour(uint8_t h);
-	void setAlarm1Day(uint8_t d);
+	void setAlarm1Second(uint8_t s = 255);
+	void setAlarm1Minute(uint8_t m = 255);
+	void setAlarm1Hour(uint8_t h = 255);
+	void setAlarm1Day(uint8_t d = 255);
 
 	// To set specific values of alarm2, use the setAlarm2____ functions:
-	void setAlarm2Minute(uint8_t m);
-	void setAlarm2Hour(uint8_t h);
-	void setAlarm2Day(uint8_t d);
+	void setAlarm2Minute(uint8_t m = 255);
+	void setAlarm2Hour(uint8_t h = 255);
+	void setAlarm2Day(uint8_t d = 255);
 	
 	///////////////////////
 	// Reading Alarm 1 //

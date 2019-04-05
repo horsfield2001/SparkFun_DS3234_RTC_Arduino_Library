@@ -612,6 +612,15 @@ void DS3234::setAlarm1Second(uint8_t s)
 		uint8_t _s = DECtoBCD(s);
 		spiWriteByte(DS3234_REGISTER_A1SEC, _s);
 	}
+	else
+	{
+		if (s == 255)
+		{
+			uint8_t value = spiReadByte(DS3234_REGISTER_A1SEC) | ALARM_MODE_BIT;
+			spiWriteByte(DS3234_REGISTER_A1SEC, value);
+		}
+	}
+	
 }
 
 void DS3234::setAlarm1Minute(uint8_t m)
@@ -620,6 +629,14 @@ void DS3234::setAlarm1Minute(uint8_t m)
 	{
 		uint8_t _m = DECtoBCD(m);
 		spiWriteByte(DS3234_REGISTER_A1MIN, _m);
+	}
+	else
+	{
+		if (m == 255)
+		{
+			uint8_t value = spiReadByte(DS3234_REGISTER_A1MIN) | ALARM_MODE_BIT;
+			spiWriteByte(DS3234_REGISTER_A1MIN, value);
+		}
 	}
 }
 
@@ -631,6 +648,14 @@ void DS3234::setAlarm1Hour(uint8_t h)
 		uint8_t _h = DECtoBCD(h);
 		spiWriteByte(DS3234_REGISTER_A1HR, _h);
 	}
+	else
+	{
+		if (h == 255)
+		{
+			uint8_t value = spiReadByte(DS3234_REGISTER_A1HR) | ALARM_MODE_BIT;
+			spiWriteByte(DS3234_REGISTER_A1HR, value);
+		}
+	}
 }
 
 void DS3234::setAlarm1Day(uint8_t d)
@@ -639,6 +664,14 @@ void DS3234::setAlarm1Day(uint8_t d)
 	{
 		uint8_t _d = DECtoBCD(d);
 		spiWriteByte(DS3234_REGISTER_A1DA, _d);
+	}
+	else
+	{
+		if (d == 255)
+		{
+			uint8_t value = spiReadByte(DS3234_REGISTER_A1DA) | ALARM_MODE_BIT;
+			spiWriteByte(DS3234_REGISTER_A1DA, value);
+		}
 	}
 }
 
@@ -650,6 +683,14 @@ void DS3234::setAlarm2Minute(uint8_t m)
 		uint8_t _m = DECtoBCD(m);
 		spiWriteByte(DS3234_REGISTER_A2MIN, _m);
 	}
+	else
+	{
+		if (m == 255)
+		{
+			uint8_t value = spiReadByte(DS3234_REGISTER_A2MIN) | ALARM_MODE_BIT;
+			spiWriteByte(DS3234_REGISTER_A2MIN, value);
+		}
+	}
 }
 
 void DS3234::setAlarm2Hour(uint8_t h)
@@ -660,6 +701,14 @@ void DS3234::setAlarm2Hour(uint8_t h)
 		uint8_t _h = DECtoBCD(h);
 		spiWriteByte(DS3234_REGISTER_A2HR, _h);
 	}
+	else
+	{
+		if (h == 255)
+		{
+			uint8_t value = spiReadByte(DS3234_REGISTER_A2HR) | ALARM_MODE_BIT;
+			spiWriteByte(DS3234_REGISTER_A2HR, value);
+		}
+	}
 }
 void DS3234::setAlarm2Day(uint8_t d)
 {
@@ -667,6 +716,14 @@ void DS3234::setAlarm2Day(uint8_t d)
 	{
 		uint8_t _d = DECtoBCD(d);
 		spiWriteByte(DS3234_REGISTER_A2DA, _d);
+	}
+	else
+	{
+		if (d == 255)
+		{
+			uint8_t value = spiReadByte(DS3234_REGISTER_A2DA) | ALARM_MODE_BIT;
+			spiWriteByte(DS3234_REGISTER_A2DA, value);
+		}
 	}
 }
 
